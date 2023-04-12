@@ -1,50 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
+import useSpeedGame from './Hooks/useSpeedGame'
 
 export default function Game2() {
-    const timeToEnd=10
-    const [word,setWord]=useState("")
-    const [count,setCount]=useState()
-    const [timeRunner,setTimeRunner]=useState(timeToEnd)
-    const [isRunning,setIsRunning]=useState(false)
-    const textBoxRef=useRef(null)
+    const [startingTime,setStartingTime]=useState(10)
+   const {
+        word,
+        handleChange,
+        isRunning,
+        textBoxRef,
+        timeRunner,
+        count,
+        startGame
+    } = useSpeedGame(startingTime)
 
-    function handleChange(e){
-        const {value}=e.target
-        setWord(value)
-        // console.log(word)
-    }
+   function  handleStartingTime(e){
+     const {value}=e.target
+     setStartingTime(value);
 
-    function calculateWordInText(text){
-        return text.trim()
-                        .split(" ").
-                        filter((word)=>word !=="")
-                        .length
-    }
-
-    function startGame(){
-        setCount(0)
-        setIsRunning(true)
-        setWord("")
-        setTimeRunner(timeToEnd)
-        textBoxRef.current.disabled=false
-        textBoxRef.current.focus()
-    }
-    function  endGame(){
-        setIsRunning(false);
-        setCount(calculateWordInText(word))
-    }
-    useEffect(()=>{
-        if(timeRunner >0 && isRunning){
-            setTimeout(()=>{
-                setTimeRunner(timeRunner-1)
-            },1000)
-        }else if(timeRunner ===0 ){
-            endGame()
-        }
-    },[timeRunner,isRunning])
+   }
   return (
     <div>
         <h1>How fast do you type?</h1>
+        <div className='input-field'>
+        <label htmlFor="timeInput">Select Time: </label>
+        <input
+            name='timeInput'
+            type='number'
+            disabled={isRunning}
+            value={startingTime}
+            onChange={handleStartingTime}
+            />
+        </div>
         <textarea 
             name="" 
             id=""

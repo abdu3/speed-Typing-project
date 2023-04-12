@@ -23,6 +23,7 @@ h4,h1{
     text-align: center;
     color: #00b800;
 }
+
 textarea{
     font-family:'Press Start 2P' cursive;
     border: 3px solid black;
@@ -36,6 +37,21 @@ textarea{
     font-size: 15px;
     font-weight: bold;
 }
-textarea:disabled{
+.input-field{
+    text-align: center;
+    margin-top: 5px;
+}
+input{
+    width: 45px;
+    height: 4px;
+    background: #00b800;
+    padding: 10px;
+    border: 1px solid black;
+}
+label{
+    color: #00b800;
+}
+textarea:disabled,
+input:disabled{
 background-color: #a5a2a2;
 }
